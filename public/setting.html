@@ -461,7 +461,7 @@
 
         // コメントの見た目反映
         for (let i = 0; i < comment.length; i++) {
-          comment[i].style.marginbottom = margin_comment + "px";
+          comment[i].style.marginBottom = margin_comment + "px";
           comment[i].style.width = width_comment + "px";
           comment[i].style.borderRadius = redius_comment + "px";
           comment[i].style.backgroundColor = bgColor;
@@ -635,6 +635,7 @@
         const selectBorder = document.getElementById("selectBorder").value;
         const bdColor = document.getElementById("bdColor").value;
         const bdWeight = document.getElementById("bdWeight").value;
+        const CommentCnt = document.getElementById("selectCommentCnt").value;
 
         // ユーザー名の値
         const enableUsername = document.getElementById("hasUsername");
@@ -659,7 +660,7 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            noUsername: noUsername,
+            enableBorder: enableBorder,
             margin_comment: margin_comment,
             width_comment: width_comment,
             redius_comment: redius_comment,
@@ -667,11 +668,37 @@
             selectBorder: selectBorder,
             bdColor: bdColor,
             bdWeight: bdWeight,
+            enableUsername: enableUsername,
+            topUsername: topUsername,
+            fontUsername: fontUsername,
+            fontSize_Username: fontSize_Username,
+            color_Username: color_Username,
+            fontComment: fontComment,
+            fontSize_comment: fontSize_comment,
+            color_comment: color_comment,
           }),
         })
           .then((response) => response.text())
           .then((result) => {
             console.log("CSSファイルが更新されました:", result);
+          })
+          .catch((error) => {
+            console.error("エラーが発生しました:", error);
+          });
+
+        // サーバーにPOSTリクエストを送信
+        fetch("/update-json", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            selectCommentCnt: CommentCnt,
+          }),
+        })
+          .then((response) => response.text())
+          .then((result) => {
+            console.log("JSONファイルが更新されました:", result);
           })
           .catch((error) => {
             console.error("エラーが発生しました:", error);

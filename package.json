@@ -15,7 +15,9 @@
   },
   "pkg": {
     "assets": [
-      "public/setting.html"
+      "public/setting.html",
+      "public/ZboyComment.css",
+      "data.json"
     ]
   }
 }

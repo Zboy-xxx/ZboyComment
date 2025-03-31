@@ -1,36 +1,36 @@
 
   .comment {
-      margin-bottom: 5px;
+      margin-bottom: 16px;
       padding: 5px;
       overflow-wrap: normal;
       width: 400px;
       height: auto;
-      background: #fcd6ff;
+      background: #d6f5ff;
       border: 5px solid #68cfff;
       border-radius: 10px;
       position: relative;
       display: flex;
       flex-direction: column;
     }
-
-  .name {
-    height: auto;
-    width: auto;
-    font-weight: bold;
-    font-size: 18px;
-    font-family: "Noto Sans JP";
-    color: #d321ff;
-  }
-
+  
+      .name{
+        height: auto;
+        width: auto;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        font-family: Noto Sans JP;
+        color: #d321ff;
+      }
   .text {
-    margin-left: 15px;
+    margin-left: 10px;
     height: auto;
-    /* width: 95%; */
     width: auto;
     overflow-wrap: normal;
     font-weight: bold;
     font-size: 20px;
     color: #524f4f;
-    font-family: "Noto Sans JP";
+    font-family: Noto Sans JP;
   }
   
