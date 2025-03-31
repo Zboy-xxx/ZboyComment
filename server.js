@@ -8,9 +8,14 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ルートハンドラを追加
-app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "public", "setting.html"));
+// app.get("/", (_, res) => {
+//   res.sendFile(path.join(__dirname, "public", "setting.html"));
+// });
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "public", "setting.html"));
 });
+console.log("Resolved Path:", path.join(__dirname, "public", "setting.html"));
 
 // CSSファイル更新エンドポイント
 app.post("/update-css", (req, res) => {
