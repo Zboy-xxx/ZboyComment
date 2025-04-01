@@ -122,7 +122,6 @@ app.post("/update-json", (req, res) => {
       res.status(500).send("ファイルの更新に失敗しました。");
       return;
     }
-    console.log("JSONファイル書き込み成功");
     res.send("JSONファイルが更新されました。");
   });
 });
