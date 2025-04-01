@@ -413,7 +413,7 @@
         </div>
         <div class="sampleContainer" id="sampleContainer">
           <div class="comment" id="comment" name="comment">
-            <span class="name" id="name" name="name">【Zboy】ゼボ</span>
+            <span class="name" id="name" name="name">ぜｯトBot君</span>
             <span class="text" id="text" name="text"
               >ﾝﾝﾝﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟ ﾁｭ ﾁｭﾊﾟ 同説1やぞｗ
               ﾝﾝﾝﾓﾁｭﾊﾟ愛してるよ　愛してるよー！！　愛してるよ　愛してるよ（囁き）</span
@@ -577,17 +577,10 @@
 
       // コメント生成
       function generateComments(commentCount) {
-        const comment = document.getElementById("comment");
-        let sampleContainer = document.getElementById("sampleContainer");
+        const sampleContainer = document.getElementById("sampleContainer");
 
-        const name = document.getElementById("name");
-        const text = document.getElementById("text");
-        const commentHtml =
-          '<div class="comment" id="comment"><span class="name" id="name">【Zboy】ゼボ</span><span class="text" id="text">ApexとSplatoonだけはやりません。</span></div>';
-
-        // 要素を削除
-        var clone = sampleContainer.cloneNode(false);
-        clone.id = "sampleContainer";
+        // 要素を削除してクリーンな状態にする
+        const clone = sampleContainer.cloneNode(false); // 子要素を削除
         sampleContainer.parentNode.replaceChild(clone, sampleContainer);
 
         commentCount = parseInt(commentCount, 10);
@@ -595,21 +588,17 @@
         // 要素を追加
         for (let i = 0; i < commentCount; i++) {
           const commentDiv = document.createElement("div");
-
           commentDiv.className = "comment";
-          commentDiv.id = "comment";
-          comment.setAttribute("name", "name");
+          commentDiv.id = `comment_${i}`;
 
           const nameSpan = document.createElement("span");
           nameSpan.className = "name";
-          nameSpan.id = "name";
-          nameSpan.name = "name";
+          nameSpan.id = `name_${i}`;
           nameSpan.textContent = "ぜｯトBot君";
 
           const textSpan = document.createElement("span");
           textSpan.className = "text";
-          textSpan.id = "text";
-          textSpan.name = "text";
+          textSpan.id = `text_${i}`;
           textSpan.textContent =
             "ﾝﾝﾝﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟﾓﾝﾁｭﾊﾟ ﾁｭ ﾁｭﾊﾟ 同説1やぞｗ ﾝﾝﾝﾓﾁｭﾊﾟ愛してるよ　愛してるよー！！　愛してるよ　愛してるよ（囁き）";
 
@@ -625,9 +614,7 @@
       // 設定保存
       function updateCss() {
         // 見た目の値
-        const enableBorder = document.getElementById("isBorder");
-        const disableBorder = document.getElementById("isNotBorder");
-        const noUsername = document.getElementById("noUsername").value;
+        const enableBorder = document.getElementById("isBorder").checked;
         const margin_comment = document.getElementById("margin_comment").value;
         const width_comment = document.getElementById("width_comment").value;
         const redius_comment = document.getElementById("redius_comment").value;
@@ -638,10 +625,8 @@
         const CommentCnt = document.getElementById("selectCommentCnt").value;
 
         // ユーザー名の値
-        const enableUsername = document.getElementById("hasUsername");
-        const disableUsername = document.getElementById("noUsername");
-        const topUsername = document.getElementById("topUsername");
-        const notTopUsername = document.getElementById("notTopUsername");
+        const enableUsername = document.getElementById("hasUsername").checked;
+        const topUsername = document.getElementById("topUsername").checked;
         const fontUsername = document.getElementById("fontUsername").value;
         const fontSize_Username =
           document.getElementById("fontSize_Username").value;

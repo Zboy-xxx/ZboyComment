@@ -39,68 +39,49 @@ app.post("/update-css", (req, res) => {
     color_comment,
   } = req.body;
 
-  console.log("enableUsername=", enableUsername);
-  console.log("fontComment=", fontComment);
-  console.log("fontSize_comment=", fontSize_comment);
-  console.log("color_comment=", color_comment);
-
-  const commentCss = enableBorder
-    ? `.comment {
-      margin-bottom: ${margin_comment}px;
-      padding: 5px;
-      overflow-wrap: normal;
-      width: ${width_comment}px;
-      height: auto;
-      background: ${bgColor};
-      border: ${bdWeight}px ${selectBorder} ${bdColor};
-      border-radius: ${redius_comment}px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }`
-    : `.comment {
-      margin-bottom: ${margin_comment}px;
-      padding: 5px;
-      overflow-wrap: normal;
-      width: ${width_comment}px;
-      height: auto;
-      background: ${bgColor};
-      border: 0px ${selectBorder} ${bdColor};
-      border-radius: ${redius_comment}px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }`;
-
+  let commentCss = "";
   let nameCss = "";
+
+  // 共通部分の定義
+  const baseCommentCss = `
+  margin-bottom: ${margin_comment}px;
+  padding: 5px;
+  overflow-wrap: normal;
+  width: ${width_comment}px;
+  height: auto;
+  background: ${bgColor};
+  border-radius: ${redius_comment}px;
+  position: relative;
+`;
+
+  const borderCss = enableBorder
+    ? `border: ${bdWeight}px ${selectBorder} ${bdColor};`
+    : `border: 0px ${selectBorder} ${bdColor};`;
+
+  const flexCss = `display: flex; flex-direction: column;`;
+
+  // コメントCSSの構築
+  commentCss = `.comment {
+  ${baseCommentCss}
+  ${borderCss}
+  ${enableUsername && topUsername ? flexCss : ""}
+}`;
+
+  // 名前CSSの構築
   if (enableUsername) {
-    if (topUsername) {
-      nameCss = `
-      .name{
-        height: auto;
-        width: auto;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        font-size: ${fontSize_Username}px;
-        font-family: ${fontUsername};
-        color: ${color_Username};
-      }`;
-    } else {
-      nameCss = `
-      .name{
-        height: auto;
-        width: auto;
-        font-weight: bold;
-        font-size: ${fontSize_Username}px;
-        font-family: ${fontUsername};
-        color: ${color_Username};
-      }`;
-    }
-  } else {
     nameCss = `
-    .name{display:none;}
-    `;
+    .name {
+      height: auto;
+      width: auto;
+      font-weight: bold;
+      font-size: ${fontSize_Username}px;
+      font-family: ${fontUsername};
+      color: ${color_Username};
+      ${topUsername ? "display: flex; flex-direction: column;" : ""}
+    }
+  `;
+  } else {
+    nameCss = `.name { display: none; }`;
   }
 
   const cssContent = `
